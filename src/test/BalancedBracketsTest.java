@@ -10,7 +10,6 @@ public class BalancedBracketsTest {
     //TODO: add tests here
     @Test
     public void emptyTest() {
-
         assertEquals(true, true);
     }
 
@@ -18,25 +17,44 @@ public class BalancedBracketsTest {
     public void onlyBracketsReturnsTrue() {
         assertTrue(BalancedBrackets.hasBalancedBrackets("[]"));
     }
+
+    @Test
+    public void bracketsEncloseString() {
+        assertTrue(BalancedBrackets.hasBalancedBrackets("[LaunchCode]"));
+    }
+
     @Test
     public void noBracketsStringReturnsTrue() {
         assertTrue(BalancedBrackets.hasBalancedBrackets(""));
     }
+
     @Test
     public void bracketsInsideOfString() {
-        assertTrue(BalancedBrackets.hasBalancedBrackets("String[string]"));
-    }
-    @Test
-    public void bracketsBeforeString() {
-        assertTrue(BalancedBrackets.hasBalancedBrackets("[]String"));
-    }
-    @Test
-    public void onlyOneOpenBracket() {
-        assertFalse(BalancedBrackets.hasBalancedBrackets("[String"));
-    }
-    @Test
-    public void backwardsBrackets() {
-        assertFalse(BalancedBrackets.hasBalancedBrackets("String]string["));
+        assertTrue(BalancedBrackets.hasBalancedBrackets("Launch[Code]"));
     }
 
+    @Test
+    public void bracketsTogetherOutsideOfWord() {
+        assertTrue(BalancedBrackets.hasBalancedBrackets("[]LaunchCode"));
+    }
+
+    @Test
+    public void multiplePairsOfBrackets() {
+        assertTrue(BalancedBrackets.hasBalancedBrackets("[]Launch[Code]"));
+    }
+
+    @Test
+    public void onlyOneOpeningBracketNoText() {
+        assertFalse(BalancedBrackets.hasBalancedBrackets("["));
+    }
+
+    @Test
+    public void onlyOneBracketWithText() {
+        assertFalse(BalancedBrackets.hasBalancedBrackets("[LaunchCode"));
+    }
+
+    @Test
+    public void bracketsFacingWrongWayWithText() {
+        assertFalse(BalancedBrackets.hasBalancedBrackets("]LaunchCode["));
+    }
 }
